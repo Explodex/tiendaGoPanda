@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.idat.edu.pe.model.Producto;
-import app.idat.edu.pe.repository.ProductoRepository;
+import app.idat.edu.pe.repository.IProductoRepository;
 
 @Service
 public class ProductoServiceImpl implements ProductoService{
 
 	@Autowired
-	private ProductoRepository productoRepository;
+	private IProductoRepository productoRepository;
 	
 	@Override
 	public Producto save(Producto producto) {
