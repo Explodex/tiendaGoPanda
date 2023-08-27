@@ -7,16 +7,14 @@ import app.idat.edu.pe.model.DetalleOrden;
 import app.idat.edu.pe.repository.IDetalleOrdenRepository;
 
 @Service
-public class DetalleOrdenImpl implements IDetalleOrdenService{
-
+public class DetalleOrdenServiceImpl implements IDetalleOrdenService{
+	
 	@Autowired
 	private IDetalleOrdenRepository detalleOrdenRepository;
-	
+
 	@Override
 	public DetalleOrden save(DetalleOrden detalleOrden) {
 		return detalleOrdenRepository.save(detalleOrden);
 	}
-	
-	
 
 }

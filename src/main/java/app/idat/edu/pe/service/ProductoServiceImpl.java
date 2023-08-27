@@ -11,10 +11,10 @@ import app.idat.edu.pe.repository.IProductoRepository;
 
 @Service
 public class ProductoServiceImpl implements ProductoService{
-
+	
 	@Autowired
 	private IProductoRepository productoRepository;
-	
+
 	@Override
 	public Producto save(Producto producto) {
 		return productoRepository.save(producto);
@@ -27,14 +27,12 @@ public class ProductoServiceImpl implements ProductoService{
 
 	@Override
 	public void update(Producto producto) {
-		productoRepository.save(producto);
-		
+		productoRepository.save(producto);		
 	}
 
 	@Override
 	public void delete(Integer id) {
-		productoRepository.deleteById(id);
-		
+		productoRepository.deleteById(id);		
 	}
 
 	@Override

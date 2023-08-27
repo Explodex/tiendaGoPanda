@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import app.idat.edu.pe.model.DetalleOrden;
 
 @Repository
-public interface IDetalleOrdenRepository extends JpaRepository<DetalleOrden, Integer>{
+public interface IDetalleOrdenRepository extends JpaRepository<DetalleOrden, Integer> {
 
 }

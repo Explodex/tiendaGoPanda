@@ -1,6 +1,7 @@
 package app.idat.edu.pe.model;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ public class Orden {
 	private String numero;
 	private Date fechaCreacion;
 	private Date fechaRecibida;
+
 	private double total;
 	
 	@ManyToOne
@@ -28,6 +30,7 @@ public class Orden {
 	private DetalleOrden detalle;
 	
 	public Orden() {
+	
 	}
 
 	public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
@@ -78,6 +81,7 @@ public class Orden {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -100,6 +104,6 @@ public class Orden {
 		return "Orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
 				+ fechaRecibida + ", total=" + total + "]";
 	}
-
 	
+
 }

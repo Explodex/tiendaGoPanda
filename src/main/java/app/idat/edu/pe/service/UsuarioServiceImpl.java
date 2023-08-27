@@ -1,5 +1,6 @@
 package app.idat.edu.pe.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,10 @@ import app.idat.edu.pe.repository.IUsuarioRepository;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
-	
+
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
-	
+
 	@Override
 	public Optional<Usuario> findById(Integer id) {
 		return usuarioRepository.findById(id);
@@ -29,4 +30,10 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		return usuarioRepository.findByEmail(email);
 	}
 
+	@Override
+	public List<Usuario> findAll() {
+		return usuarioRepository.findAll();
+	}
+	
+	
 }
