@@ -1,6 +1,7 @@
 package app.idat.edu.pe.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ import app.idat.edu.pe.model.DetalleOrden;
 import app.idat.edu.pe.model.Orden;
 import app.idat.edu.pe.model.Producto;
 import app.idat.edu.pe.model.Usuario;
+import app.idat.edu.pe.service.IDetalleOrdenService;
+import app.idat.edu.pe.service.IOrdenService;
 import app.idat.edu.pe.service.IUsuarioService;
 import app.idat.edu.pe.service.ProductoService;
 
@@ -33,6 +36,12 @@ public class HomeController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IOrdenService ordenService;
+	
+	@Autowired
+	private IDetalleOrdenService detalleOrdenService;
 	
 	//para almacenar los detalles de la orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
@@ -140,5 +149,32 @@ public class HomeController {
 			
 			return "usuario/resumenorden";
 		}
+		
+		// guardar la orden
+		@GetMapping("/saveOrder")
+		public String saveOrder() {
+			Date fechaCreacion = new Date();
+			orden.setFechaCreacion(fechaCreacion);
+			orden.setNumero(ordenService.generarNumeroOrden());
+			
+			//usuario
+			Usuario usuario =usuarioService.findById(1).get();
+			
+			orden.setUsuario(usuario);
+			ordenService.save(orden);
+			
+			//guardar detalles
+			for (DetalleOrden dt:detalles) {
+				dt.setOrden(orden);
+				detalleOrdenService.save(dt);
+			}
+			
+			///limpiar lista y orden
+			orden = new Orden();
+			detalles.clear();
+			
+			return "redirect:/";
+		}
+		
 
 }
