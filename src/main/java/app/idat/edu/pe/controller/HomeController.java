@@ -56,7 +56,11 @@ public class HomeController {
 	public String home(Model model, HttpSession session) {
 		
 		log.info("Sesion del usuario: {}", session.getAttribute("idusuario"));
+		
 		model.addAttribute("productos", productoService.findAll());
+		
+		//session
+		model.addAttribute("sesion", session.getAttribute("idusuario"));
 		
 		return "usuario/home";
 	}
@@ -138,6 +142,8 @@ public class HomeController {
 			
 			model.addAttribute("cart", detalles);
 			model.addAttribute("orden", orden);
+			
+			
 			return "/usuario/carrito";
 		}
 		
@@ -150,7 +156,9 @@ public class HomeController {
 			model.addAttribute("orden", orden);
 			model.addAttribute("usuario", usuario);
 			
-			return "usuario/resumenorden";
+			//sesion
+			model.addAttribute("sesion", session.getAttribute("idusuario"));
+			return "/usuario/carrito";
 		}
 		
 		// guardar la orden
