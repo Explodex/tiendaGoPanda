@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.idat.edu.pe.model.Orden;
 import app.idat.edu.pe.model.Usuario;
+import app.idat.edu.pe.service.IOrdenService;
 import app.idat.edu.pe.service.IUsuarioService;
 import jakarta.servlet.http.HttpSession;
 
@@ -25,6 +26,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IOrdenService ordenService;
 	
 	// /usuario/registro
 		@GetMapping("/registro")
