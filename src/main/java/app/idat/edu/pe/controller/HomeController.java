@@ -138,12 +138,13 @@ public class HomeController {
 		}
 		
 		@GetMapping("/getCart")
-		public String getCart(Model model) {
+		public String getCart(Model model, HttpSession session) {
 			
 			model.addAttribute("cart", detalles);
 			model.addAttribute("orden", orden);
 			
-			
+			//sesion
+			model.addAttribute("sesion", session.getAttribute("idusuario"));
 			return "/usuario/carrito";
 		}
 		
@@ -156,9 +157,7 @@ public class HomeController {
 			model.addAttribute("orden", orden);
 			model.addAttribute("usuario", usuario);
 			
-			//sesion
-			model.addAttribute("sesion", session.getAttribute("idusuario"));
-			return "/usuario/carrito";
+			return "usuario/resumenorden";
 		}
 		
 		// guardar la orden
