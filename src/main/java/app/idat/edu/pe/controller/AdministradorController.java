@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.idat.edu.pe.model.Producto;
+import app.idat.edu.pe.service.IOrdenService;
 import app.idat.edu.pe.service.IUsuarioService;
 import app.idat.edu.pe.service.ProductoService;
 
@@ -21,6 +22,9 @@ public class AdministradorController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IOrdenService ordensService;
 	
 	@GetMapping("")
 	public String home(Model model) {
@@ -35,6 +39,12 @@ public class AdministradorController {
 	public String usuarios(Model model) {
 		model.addAttribute("usuarios", usuarioService.findAll());
 		return "administrador/usuarios";
+	}
+	
+	@GetMapping("/ordenes")
+	public String ordenes(Model model) {
+		model.addAttribute("ordenes", ordensService.findAll());
+		return "administrador/ordenes";
 	}
 
 }
