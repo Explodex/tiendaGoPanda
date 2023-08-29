@@ -41,7 +41,7 @@ public class UsuarioController {
 		public String save(Usuario usuario) {
 			logger.info("Usuario registro: {}", usuario);
 			usuario.setTipo("USER");
-			usuarioService.save(usuario);		
+			usuarioService.save(usuario);	
 			return "redirect:/";
 		}
 		

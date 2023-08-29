@@ -66,7 +66,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("productohome/{id}")
-	public String productoHome(@PathVariable Integer id, Model model) {
+	public String productoHome(@PathVariable Integer id, Model model, HttpSession session) {
 		log.info("id producto enviado como parametro {}",id);
 		Producto producto = new Producto();
 		Optional<Producto> productoOptional = productoService.get(id);
@@ -74,11 +74,14 @@ public class HomeController {
 		
 		model.addAttribute("producto", producto);
 		
+		//session
+				model.addAttribute("sesion", session.getAttribute("idusuario"));
+		
 		return "usuario/productohome";
 	}
 	
 	@PostMapping("/cart")
-	public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
+	public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model, HttpSession session) {
 		DetalleOrden detalleOrden = new DetalleOrden();
 		Producto producto = new Producto();
 		double sumaTotal = 0;
@@ -107,13 +110,16 @@ public class HomeController {
 		orden.setTotal(sumaTotal);
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
+		
+		//session
+		model.addAttribute("sesion", session.getAttribute("idusuario"));
 
 		return "usuario/carrito";
 	}
 	
 	// quitar un producto del carrito
 		@GetMapping("/delete/cart/{id}")
-		public String deleteProductoCart(@PathVariable Integer id, Model model) {
+		public String deleteProductoCart(@PathVariable Integer id, Model model,HttpSession session) {
 
 			// lista nueva de prodcutos
 			List<DetalleOrden> ordenesNueva = new ArrayList<DetalleOrden>();
@@ -133,6 +139,9 @@ public class HomeController {
 			orden.setTotal(sumaTotal);
 			model.addAttribute("cart", detalles);
 			model.addAttribute("orden", orden);
+			
+			//session
+			model.addAttribute("sesion", session.getAttribute("idusuario"));
 
 			return "usuario/carrito";
 		}
@@ -156,6 +165,9 @@ public class HomeController {
 			model.addAttribute("cart", detalles);
 			model.addAttribute("orden", orden);
 			model.addAttribute("usuario", usuario);
+			
+			//session
+			model.addAttribute("sesion", session.getAttribute("idusuario"));
 			
 			return "usuario/resumenorden";
 		}
